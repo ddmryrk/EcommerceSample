@@ -1,5 +1,4 @@
-﻿using System;
-using EcommerceSample.Constants;
+﻿using EcommerceSample.Constants;
 using EcommerceSample.Entities;
 using EcommerceSample.Exceptions;
 using EcommerceSample.Interfaces.Repositories;
@@ -11,8 +10,13 @@ namespace EcommerceSampleTests.Services
 {
     public class CampaignServiceTest
     {
+        Campaign defaultCampaign;
         public CampaignServiceTest()
         {
+            var discount = new DiscountOption(DiscountType.Ratio);
+            discount.SetValue(25);
+            var category = new Category("Food");
+            defaultCampaign = new Campaign("Campaign 1", category, 1, discount);
         }
 
         [Fact]
@@ -21,15 +25,10 @@ namespace EcommerceSampleTests.Services
             var campaignRepositoryMock = new Mock<ICampaignRepository>();
             campaignRepositoryMock
                 .Setup(p => p.Add(It.IsAny<Campaign>()))
-                .Returns(new Result(true));
-
-            var discount = new DiscountOption(DiscountType.Ratio);
-            discount.SetValue(25);
-            var category = new Category("Food");
-            var campaign = new Campaign("Campaign 1", category, 1, discount);
+                .Returns(new Result(true));            
 
             var campaignService = new CampaignService(campaignRepositoryMock.Object);
-            var result = campaignService.Add(campaign);
+            var result = campaignService.Add(defaultCampaign);
 
             Assert.True(result.IsSucceed);
         }
@@ -51,9 +50,8 @@ namespace EcommerceSampleTests.Services
             var expectedErrorMessage = "Campaign category cannot be null";
             var campaignRepositoryMock = new Mock<ICampaignRepository>();
 
-            var discount = new DiscountOption(DiscountType.Ratio);
-            discount.SetValue(25);
-            var campaign = new Campaign("Campaign 1", null, 1, discount);
+            var campaign = defaultCampaign;
+            campaign.Category = null;
 
             var campaignService = new CampaignService(campaignRepositoryMock.Object);
             var ex = Assert.Throws<CampaignInvalidException>(() => campaignService.Add(campaign));
@@ -66,10 +64,8 @@ namespace EcommerceSampleTests.Services
             var expectedErrorMessage = "MinimumCartItem is not valid";
             var campaignRepositoryMock = new Mock<ICampaignRepository>();
 
-            var discount = new DiscountOption(DiscountType.Ratio);
-            discount.SetValue(25);
-            var category = new Category("Food");
-            var campaign = new Campaign("Campaign 1", category, -1, discount);
+            var campaign = defaultCampaign;
+            campaign.MinimumCartItem = -1;
 
             var campaignService = new CampaignService(campaignRepositoryMock.Object);
             var ex = Assert.Throws<CampaignInvalidException>(() => campaignService.Add(campaign));
@@ -79,20 +75,15 @@ namespace EcommerceSampleTests.Services
         [Fact]
         public void WhenAddCampaignExistAnotherCampaignForCategory_ExpectException()
         {
-            var discount = new DiscountOption(DiscountType.Ratio);
-            discount.SetValue(25);
-            var category = new Category("Food");
-            var campaign = new Campaign("Campaign 1", category, 1, discount);
-
             var expectedErrorMessage = "There is a campaign for this category";
             var campaignRepositoryMock = new Mock<ICampaignRepository>();
             campaignRepositoryMock
                 .Setup(c => c.GetByCategoryID(It.IsAny<int>()))
-                .Returns(campaign);            
+                .Returns(defaultCampaign);            
 
             var campaignService = new CampaignService(campaignRepositoryMock.Object);
 
-            var ex = Assert.Throws<CampaignInvalidException>(() => campaignService.Add(campaign));
+            var ex = Assert.Throws<CampaignInvalidException>(() => campaignService.Add(defaultCampaign));
             Assert.Equal(expectedErrorMessage, ex.Message);
         }
     }
