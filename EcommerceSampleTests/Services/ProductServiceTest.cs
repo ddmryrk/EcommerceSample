@@ -6,7 +6,7 @@ using Moq;
 using EcommerceSample.Exceptions;
 using EcommerceSample.Interfaces.Repositories;
 
-namespace EcommerceSampleTests
+namespace EcommerceSampleTests.Services
 {
     public class ProductServiceTest
     {
