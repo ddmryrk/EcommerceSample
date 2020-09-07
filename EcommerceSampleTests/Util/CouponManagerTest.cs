@@ -27,7 +27,7 @@ namespace EcommerceSampleTests.Util
             cart.Setup(c => c.GetCart()).Returns(new ShoppingCart());
 
             var manager = new CouponManager(cart.Object);
-            var result = manager.GetCouponDiscountAmountForCart();
+            var result = manager.GetCouponDiscountAmountForCart(); 
 
             Assert.Equal(0, result);
         }
