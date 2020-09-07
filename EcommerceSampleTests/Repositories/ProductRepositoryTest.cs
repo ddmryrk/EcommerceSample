@@ -1,8 +1,6 @@
-﻿using System;
-using EcommerceSample.Entities;
+﻿using EcommerceSample.Entities;
 using EcommerceSample.Repositories;
 using Xunit;
-using Moq;
 
 
 namespace EcommerceSampleTests.Repositories

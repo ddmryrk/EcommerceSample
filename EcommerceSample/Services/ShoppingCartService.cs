@@ -75,6 +75,11 @@ namespace EcommerceSample.Services
             return result;
         }
 
+        public ShoppingCart GetCart()
+        {
+            return _shoppingCartRepository.GetCart();
+        }
+
         private void IsCouponExists(Coupon coupon)
         {
             var couponService = new CouponService(_couponRepository);
@@ -82,12 +87,7 @@ namespace EcommerceSample.Services
 
             if (controlledCoupon == null)
                 throw new CouponInvalidException("Coupon is not valid");
-        }
-
-        public ShoppingCart GetCart()
-        {
-            return _shoppingCartRepository.GetCart();
-        }
+        }        
 
         private void ApplyCampaignToCart()
         {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EcommerceSample.Constants;
 using EcommerceSample.Entities;
 using EcommerceSample.Interfaces.Repositories;
-using EcommerceSample.Interfaces.Util;
 using EcommerceSample.Util;
 
 namespace EcommerceSample.Repositories

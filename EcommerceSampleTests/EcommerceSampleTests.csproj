@@ -25,5 +25,6 @@
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
     <Folder Include="Util\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
 </Project>

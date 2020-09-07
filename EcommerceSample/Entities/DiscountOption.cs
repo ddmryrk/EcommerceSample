@@ -1,7 +1,7 @@
-﻿using System;
+﻿using EcommerceSample.Constants;
 using EcommerceSample.Exceptions;
 
-namespace EcommerceSample.Constants
+namespace EcommerceSample.Entities
 {
     public class DiscountOption
     {
