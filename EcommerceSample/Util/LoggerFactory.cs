@@ -1,5 +1,4 @@
-﻿using System;
-using EcommerceSample.Interfaces.Util;
+﻿using EcommerceSample.Interfaces.Util;
 
 namespace EcommerceSample.Util
 {

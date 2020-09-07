@@ -5,8 +5,8 @@ namespace EcommerceSample.Interfaces.Services
 {
     public interface ICartService
     {
-        public Result AddItem(Product product, int quantity);
-        public Result ApplyCoupon(Coupon coupon);
+        Result AddItem(Product product, int quantity);
+        Result ApplyCoupon(Coupon coupon);
         ShoppingCart GetCart();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using EcommerceSample.Constants;
+﻿using EcommerceSample.Constants;
 using EcommerceSample.Entities;
 
 namespace EcommerceSample.Interfaces.Services

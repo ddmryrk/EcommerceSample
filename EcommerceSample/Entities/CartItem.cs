@@ -1,5 +1,4 @@
-﻿using System;
-using EcommerceSample.Interfaces;
+﻿using EcommerceSample.Interfaces;
 
 namespace EcommerceSample.Entities
 {

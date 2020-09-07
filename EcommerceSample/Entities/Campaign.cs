@@ -1,5 +1,4 @@
-﻿using EcommerceSample.Constants;
-using EcommerceSample.Interfaces;
+﻿using EcommerceSample.Interfaces;
 
 namespace EcommerceSample.Entities
 {

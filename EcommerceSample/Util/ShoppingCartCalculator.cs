@@ -1,5 +1,4 @@
-﻿using System;
-using EcommerceSample.Interfaces.Repositories;
+﻿using EcommerceSample.Interfaces.Repositories;
 
 namespace EcommerceSample.Util
 {

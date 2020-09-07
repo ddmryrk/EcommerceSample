@@ -1,5 +1,4 @@
-﻿using System;
-namespace EcommerceSample.Constants
+﻿namespace EcommerceSample.Constants
 {
     public enum DiscountType
     {
