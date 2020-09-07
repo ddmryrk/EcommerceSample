@@ -14,5 +14,6 @@
     <Folder Include="Interfaces\Repositories\" />
     <Folder Include="Interfaces\Services\" />
     <Folder Include="Util\" />
+    <Folder Include="Interfaces\Util\" />
   </ItemGroup>
 </Project>
