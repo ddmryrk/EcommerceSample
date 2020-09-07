@@ -17,6 +17,7 @@ namespace EcommerceSampleTests.Util
         CategoryRepository _categoryRepository = new CategoryRepository();
         ProductRepository _productRepository = new ProductRepository();
         CampaignRepository _campaignRepository = new CampaignRepository();
+        CouponRepository _couponRepository = new CouponRepository();
 
         CategoryService _categoryService;
         ProductService _productService;
@@ -45,7 +46,7 @@ namespace EcommerceSampleTests.Util
         public void WhenGetDeliveryCost_SingleCategorySingleItem_GetSuccessfully()
         {
             var shoppingCartRepository = new ShoppingCartRepository();
-            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository);
+            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository, _couponRepository);
             shoppingCartService.AddItem(_productService.GetByID(0), 1);
 
             var deliveryManager = new DeliveryManager(shoppingCartRepository);
@@ -62,7 +63,7 @@ namespace EcommerceSampleTests.Util
         public void WhenGetDeliveryCost_MultipleCategoryMultipleItem_GetSuccessfully()
         {
             var shoppingCartRepository = new ShoppingCartRepository();
-            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository);
+            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository, _couponRepository);
             shoppingCartService.AddItem(_productService.GetByID(0), 1);
             shoppingCartService.AddItem(_productService.GetByID(3), 1);
 

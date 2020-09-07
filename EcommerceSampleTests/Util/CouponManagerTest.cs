@@ -14,10 +14,15 @@ namespace EcommerceSampleTests.Util
     public class CouponManagerTest
     {
         Coupon _coupon;
+        CouponRepository _couponRepository = new CouponRepository();
+        CouponService _couponService;
         public CouponManagerTest()
         {
             var discount = new DiscountOption(DiscountType.Ratio, 10);
-            _coupon = new Coupon("X01", 500, discount); 
+            _coupon = new Coupon("X01", 500, discount);
+
+            _couponService = new CouponService(_couponRepository);
+            _couponService.Add(_coupon);
         }
 
         [Fact]
@@ -37,7 +42,7 @@ namespace EcommerceSampleTests.Util
         {
             var campaignRepository = new Mock<ICampaignRepository>();
             var repository = new ShoppingCartRepository();
-            var service = new ShoppingCartService(repository, campaignRepository.Object);
+            var service = new ShoppingCartService(repository, campaignRepository.Object, _couponRepository);
             service.ApplyCoupon(_coupon);
 
             var manager = new CouponManager(repository);
@@ -52,7 +57,7 @@ namespace EcommerceSampleTests.Util
             var campaignRepository = new Mock<ICampaignRepository>();
             var product = new Product("Iphone 5S", 1000, new Category("Phone"));
             var repository = new ShoppingCartRepository();
-            var service = new ShoppingCartService(repository, campaignRepository.Object);
+            var service = new ShoppingCartService(repository, campaignRepository.Object, _couponRepository);
             service.AddItem(product, 1);
             service.ApplyCoupon(_coupon);
             var expectedDiscount = 100;

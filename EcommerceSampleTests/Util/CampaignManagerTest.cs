@@ -22,6 +22,8 @@ namespace EcommerceSampleTests.Util
         CategoryService _categoryService;
         ProductService _productService;
         CampaignService _campaignService;
+
+        ICouponRepository _couponRepository;
         
         public CampaignManagerTest()
         {
@@ -37,6 +39,8 @@ namespace EcommerceSampleTests.Util
             _campaignService = new CampaignService(_campaignRepository);
             _campaignService.Add(new Campaign("Phone %20", category, 2,
                                     new DiscountOption(DiscountType.Ratio, 20)));
+
+            _couponRepository = new Mock<ICouponRepository>().Object;
         }
 
         [Fact]
@@ -57,7 +61,7 @@ namespace EcommerceSampleTests.Util
         public void WhenApplyCampaignToCart_SingleCategoryItemForCampaign_ExpectSuccess()
         {
             var shoppingCartRepository = new ShoppingCartRepository();
-            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository);
+            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository, _couponRepository);
             shoppingCartService.AddItem(_productService.GetByID(0), 2);
 
             var campaignManager = new CampaignManager(_campaignRepository, shoppingCartRepository);
@@ -75,7 +79,7 @@ namespace EcommerceSampleTests.Util
         public void WhenApplyCampaignToCart_MultipleCategoryItemForCampaign_ExpectSuccess()
         {
             var shoppingCartRepository = new ShoppingCartRepository();
-            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository);
+            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository, _couponRepository);
             shoppingCartService.AddItem(_productService.GetByID(0), 1);
             shoppingCartService.AddItem(_productService.GetByID(1), 1);
 
@@ -93,7 +97,7 @@ namespace EcommerceSampleTests.Util
         public void WhenApplyCampaignToCart_NotEnoughItemCount_ExpectNoDiscount()
         {
             var shoppingCartRepository = new ShoppingCartRepository();
-            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository);
+            var shoppingCartService = new ShoppingCartService(shoppingCartRepository, _campaignRepository, _couponRepository);
             shoppingCartService.AddItem(_productService.GetByID(0), 1);
 
             var campaignManager = new CampaignManager(_campaignRepository, shoppingCartRepository);

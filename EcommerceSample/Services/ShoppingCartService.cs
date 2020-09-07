@@ -1,6 +1,7 @@
 ﻿using System;
 using EcommerceSample.Constants;
 using EcommerceSample.Entities;
+using EcommerceSample.Exceptions;
 using EcommerceSample.Interfaces.Repositories;
 using EcommerceSample.Interfaces.Services;
 using EcommerceSample.Interfaces.Util;
@@ -14,10 +15,14 @@ namespace EcommerceSample.Services
 
         private IShoppingCartRepository _shoppingCartRepository;
         private ICampaignRepository _campaignRepository;
-        public ShoppingCartService(IShoppingCartRepository shoppingCartRepository, ICampaignRepository campaignRepository)
+        private ICouponRepository _couponRepository;
+        public ShoppingCartService(IShoppingCartRepository shoppingCartRepository,
+                                    ICampaignRepository campaignRepository,
+                                    ICouponRepository couponRepository)
         {
             _shoppingCartRepository = shoppingCartRepository;
             _campaignRepository = campaignRepository;
+            _couponRepository = couponRepository;
         }
                 
         public Result AddItem(Product product, int quantity)
@@ -50,10 +55,16 @@ namespace EcommerceSample.Services
             var result = new Result();
             try
             {
+                IsCouponExists(coupon);
+
                 _shoppingCartRepository.SetCoupon(coupon);
                 ApplyCouponToCart();
 
                 result.IsSucceed = true;
+            }
+            catch (CouponInvalidException ex)
+            {
+                result.Message = ex.Message;
             }
             catch (Exception ex)
             {
@@ -62,6 +73,15 @@ namespace EcommerceSample.Services
             }
 
             return result;
+        }
+
+        private void IsCouponExists(Coupon coupon)
+        {
+            var couponService = new CouponService(_couponRepository);
+            var controlledCoupon = couponService.GetByID(coupon.ID);
+
+            if (controlledCoupon == null)
+                throw new CouponInvalidException("Coupon is not valid");
         }
 
         public ShoppingCart GetCart()
