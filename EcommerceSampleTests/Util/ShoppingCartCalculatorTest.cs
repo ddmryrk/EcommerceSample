@@ -1,5 +1,4 @@
-﻿using System;
-using EcommerceSample.Entities;
+﻿using EcommerceSample.Entities;
 using EcommerceSample.Interfaces.Repositories;
 using EcommerceSample.Util;
 using Moq;

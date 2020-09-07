@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Moq;
 using EcommerceSample.Interfaces.Repositories;
 using EcommerceSample.Entities;

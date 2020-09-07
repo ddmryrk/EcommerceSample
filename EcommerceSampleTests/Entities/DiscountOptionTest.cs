@@ -1,5 +1,4 @@
-﻿using System;
-using EcommerceSample.Constants;
+﻿using EcommerceSample.Constants;
 using EcommerceSample.Entities;
 using EcommerceSample.Exceptions;
 using Xunit;
