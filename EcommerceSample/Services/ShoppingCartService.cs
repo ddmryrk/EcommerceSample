@@ -40,7 +40,6 @@ namespace EcommerceSample.Services
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                result.IsSucceed = false;
             }
 
             return result;

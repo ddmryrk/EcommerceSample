@@ -56,6 +56,9 @@ namespace EcommerceSample.Services
             if (campaign.Category == null)
                 throw new CampaignInvalidException("Campaign category cannot be null");
 
+            if (campaign.DiscountOption == null)
+                throw new CampaignInvalidException("Campaign discountOption cannot be null");
+
             if (campaign.MinimumCartItem < 0)
                 throw new CampaignInvalidException("MinimumCartItem is not valid");
 

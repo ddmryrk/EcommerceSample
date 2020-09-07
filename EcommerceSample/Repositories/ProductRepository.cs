@@ -22,7 +22,7 @@ namespace EcommerceSample.Repositories
 
             product.ID = Helper.GenerateIDByList(_products);
             _products.Add(product);
-            result.IsSucceed = false;
+            result.IsSucceed = true;
          
             return result;
         }
