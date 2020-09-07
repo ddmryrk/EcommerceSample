@@ -13,8 +13,7 @@ namespace EcommerceSampleTests.Services
         Campaign defaultCampaign;
         public CampaignServiceTest()
         {
-            var discount = new DiscountOption(DiscountType.Ratio);
-            discount.SetValue(25);
+            var discount = new DiscountOption(DiscountType.Ratio, 25);
             var category = new Category("Food");
             defaultCampaign = new Campaign("Campaign 1", category, 1, discount);
         }
