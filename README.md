@@ -1,2 +1,2 @@
 # EcommerceSample
-E-Commerce sample for Trendyol
+E-Commerce sample
